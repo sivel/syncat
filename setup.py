@@ -19,7 +19,7 @@ import os
 import re
 import codecs
 
-from setuptools import setup
+from setuptools import find_packages, setup
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -57,7 +57,7 @@ except Exception:
 
 setup(
     name='syncat',
-    version=find_version('syncat.py'),
+    version=find_version('syncat/__init__.py'),
     description=('Command line interface similar to ``cat`` with syntax '
                  'highlighting'),
     long_description=long_description,

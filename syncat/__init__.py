@@ -30,6 +30,9 @@ from pygments.util import ClassNotFound
 from .solarized256 import Solarized256Style
 
 
+__version__ = '1.0.0'
+
+
 class _HelpFormatter(argparse.HelpFormatter):
     def _split_lines(self, text, width):
         if '\n' in text:
