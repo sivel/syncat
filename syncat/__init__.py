@@ -53,6 +53,11 @@ def parse_args():
         nargs='?',
         help='File to print with syntax highlighting. Defaults to stdin'
     )
+    parser.add_argument(
+        '--force-color',
+        action='store_true',
+        help='Force color output, even when stdout is not a TTY'
+    )
 
     all_styles = sorted(list(get_all_styles()) + ['solarized256'])
     parser.add_argument(
@@ -112,7 +117,7 @@ def main():
         except ClassNotFound:
             lexer = guess_lexer(text)
 
-        if sys.stdout.isatty():
+        if sys.stdout.isatty() or args.force_color:
             print(
                 highlight(
                     text,
