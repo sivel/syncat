@@ -1,0 +1,28 @@
+---
+name: Run Test Suite
+
+on: [
+  push,
+  pull_request
+  ]
+
+jobs:
+  run-tests-on-linux-ubuntu-2004:
+    name: Run Test Suite on Linux (Ubuntu 20.04)
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Syncat
+        run: |
+          python -m pip install --no-cache-dir --upgrade pip setuptools wheel
+          python -m pip install --editable . --ignore-installed --no-cache-dir --upgrade
+
+      - name: Install PyTest
+        run: |
+          python -m pip install pytest
+
+      - name: Run Test Suite
+        run: |
+          pytest
