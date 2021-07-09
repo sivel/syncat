@@ -65,7 +65,7 @@ def parse_args():
         type=str,
         choices=all_styles,
         default='solarized256',
-        metavar='STYLE',
+            metavar='STYLE',
         help='Syntax highlighting style. Choices:\n%s' % '\n'.join(all_styles)
     )
     parser.add_argument(
@@ -74,7 +74,8 @@ def parse_args():
         help='List help and options for the --lexer argument'
     )
 
-    all_lexers = sorted(get_all_lexers(), key=lambda l: l[1])
+    #import pdb; pdb.set_trace();
+    all_lexers = sorted(get_all_lexers(), key=lambda l: list(l[1]))
     all_lexer_aliases = [alias for lexer in all_lexers for alias in lexer[1]]
     lexers = parser.add_mutually_exclusive_group()
     lexers.add_argument(
@@ -88,7 +89,10 @@ def parse_args():
              '--LEXER such as --lexer json or --json',
         metavar='LEXER'
     )
-    for name, aliases, _, _ in all_lexers:
+    for name, aliases, _, _ in filter(
+            lambda lexer: len(lexer[1]) > 0,
+            all_lexers
+            ):
         lexers.add_argument(
             *('--%s' % a for a in aliases),
             dest='lexer',
