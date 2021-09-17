@@ -89,6 +89,8 @@ def parse_args():
         metavar='LEXER'
     )
     for name, aliases, _, _ in all_lexers:
+        if not aliases:
+            continue
         lexers.add_argument(
             *('--%s' % a for a in aliases),
             dest='lexer',
