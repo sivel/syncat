@@ -18,6 +18,7 @@
 from __future__ import print_function
 
 import argparse
+import os
 import sys
 import textwrap
 
@@ -64,7 +65,7 @@ def parse_args():
         '--style',
         type=str,
         choices=all_styles,
-        default='solarized256',
+        default=os.getenv('SYNCAT_STYLE', 'solarized256'),
         metavar='STYLE',
         help='Syntax highlighting style. Choices:\n%s' % '\n'.join(all_styles)
     )
